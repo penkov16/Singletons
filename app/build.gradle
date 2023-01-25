@@ -4,12 +4,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "ru.netology.nmedia"
         minSdkVersion 22
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
@@ -44,60 +44,55 @@ android {
 }
 
 dependencies {
-    def core_version = "1.8.0"
-    def appcompat_version = "1.4.2"
-    def constraintlayout_version = "2.1.4"
-    def swiperefreshlayout_version = "1.1.0"
-    def coordinatorlayout_version = "1.2.0"
-    def recyclerview_version = "1.2.1"
-    def junit_version = "4.13.2"
-    def ext_junit_version = "1.1.3"
-    def espresso_core_version = "3.4.0"
-    def activity_version = "1.5.1"
-    def lifecycle_version = "2.5.1"
-    def mdc_version = "1.6.1"
-    def nav_version = "2.4.1"
-    def room_version = "2.4.3"
-    def firebase_version = "30.3.1"
+    def okhttp_version = "4.10.0"
     def glide_version = "4.13.2"
+    def core_version = "1.8.0"
     def retrofit_version = "2.9.0"
     def retrofitgson_version = "2.9.0"
-    def okhttplogging_version = "4.10.0"
+    def okhttploggin_version = "4.10.0"
     def coroutines_version = "1.6.4"
+    def room_version = "2.4.3"
+    def swiperefreshlayout_version = "1.1.0"
     def imagepicker_version = "2.1"
-    def play_services_base_version = "18.1.0"
+    def play_services_base_version = "1.6.4"
+    def workmanager_version = "2.7.1"
+    def hilt_version = "2.44"
 
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout_version"
-    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorlayout_version"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-    implementation "androidx.activity:activity-ktx:$activity_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    implementation "com.google.android.material:material:$mdc_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "androidx.work:work-runtime-ktx:$workmanager_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$play_services_base_version"
+    implementation "com.github.dhaval2404:imagepicker:$imagepicker_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation platform("com.google.firebase:firebase-bom:$firebase_version")
-    implementation "com.google.firebase:firebase-messaging-ktx"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitgson_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttplogging_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttploggin_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
-    implementation "com.github.dhaval2404:imagepicker:$imagepicker_version"
-    implementation "com.google.android.gms:play-services-base:$play_services_base_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation "androidx.fragment:fragment-ktx:1.5.2"
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.2"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.room:room-runtime:2.4.3"
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.8'
+    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    implementation 'com.google.firebase:firebase-analytics:21.1.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout_version"
 
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    kapt 'androidx.room:room-compiler:2.4.3'
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }

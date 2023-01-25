@@ -18,6 +18,7 @@ import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.di.DependencyContainer
 import ru.netology.nmedia.viewmodel.AuthViewModel
 import ru.netology.nmedia.viewmodel.ViewModelFactory
+import javax.inject.Inject
 
 class AppActivity : AppCompatActivity(R.layout.activity_app) {
     private val dependencyContainer = DependencyContainer.getInstance()
@@ -26,6 +27,12 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             ViewModelFactory(dependencyContainer.repository, dependencyContainer.appAuth)
         }
     )
+
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
+
+    @Inject
+    lateinit var googleApiAvailability: GoogleApiAvailability
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,25 +61,15 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             invalidateOptionsMenu()
         }
 
-        FirebaseInstallations.getInstance().id.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                println("some stuff happened: ${task.exception}")
-                return@addOnCompleteListener
-            }
-
-            val token = task.result
-            println(token)
-        }
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                println("some stuff happened: ${task.exception}")
-                return@addOnCompleteListener
-            }
-
-            val token = task.result
-            println(token)
-        }
+//        FirebaseInstallations.getInstance().id.addOnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//                println("some stuff happened: ${task.exception}")
+//                return@addOnCompleteListener
+//            }
+//
+//            val token = task.result
+//            println(token)
+//        }
 
         checkGoogleApiAvailability()
     }
@@ -109,7 +106,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
     }
 
     private fun checkGoogleApiAvailability() {
-        with(GoogleApiAvailability.getInstance()) {
+        with(googleApiAvailability) {
             val code = isGooglePlayServicesAvailable(this@AppActivity)
             if (code == ConnectionResult.SUCCESS) {
                 return@with
@@ -118,8 +115,12 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
                 getErrorDialog(this@AppActivity, code, 9000)?.show()
                 return
             }
-            Toast.makeText(this@AppActivity, R.string.google_play_unavailable, Toast.LENGTH_LONG)
+            Toast.makeText(this@AppActivity, "Google Api Unavailable", Toast.LENGTH_LONG)
                 .show()
+        }
+
+        firebaseMessaging.token.addOnSuccessListener {
+            println(it)
         }
     }
 }
